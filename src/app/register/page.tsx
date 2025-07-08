@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/router";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import z from "zod";
@@ -27,7 +26,32 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+const onSubmit = (data: FieldValues) => {
+  const registerUser = async () => {
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to register");
+      }
+
+      const result = await response.json();
+      console.log("Registration successful:", result);
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
+
+  // 👇 You need to call the function here
+  registerUser();
+};
 
 const Login = () => {
   const {
@@ -35,36 +59,6 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-  
-  const router = useRouter();
-
-  const onSubmit = (data: FieldValues) => {
-    const registerUser = async () => {
-      try {
-        const response = await fetch("/api/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to register");
-        }
-
-        const result = await response.json();
-        console.log("Registration successful:", result);
-        // Redirect to the login page after successful registration
-        router.push("/login");
-      } catch (error) {
-        console.error("Error during registration:", error);
-      }
-    };
-
-    // 👇 You need to call the function here
-    registerUser();
-  };
   return (
     <>
       <div className="absolute right-0 top-0 h-full w-[700px] bg-green-900/50 backdrop-blur-md rounded-tl-[50px] rounded-bl-[50px] z-10">
