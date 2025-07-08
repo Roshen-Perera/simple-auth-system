@@ -5,6 +5,7 @@ const port = 3030;
 
 app.get('/health', (req, res) => {
     res.status(200).send('Backend is running');
+    console.log('Backend is running');
 });
 
 app.listen(port, () => {
