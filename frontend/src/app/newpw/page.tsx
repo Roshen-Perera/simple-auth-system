@@ -8,9 +8,11 @@ const Login = () => {
     <>
       <div className="absolute right-0 top-0 h-full w-[700px] bg-green-900/50 backdrop-blur-md rounded-tl-[50px] rounded-bl-[50px] z-10">
         <div className="p-40 flex flex-col items-center justify-center h-full">
-          <h1 className="text-5xl font-semibold mb-2 text-white">Welcome</h1>
-          <p className="mb-10 text-sm font-semibold text-gray-200">
-            Enter your email address to reset your password
+          <h1 className="text-5xl font-semibold mb-2 text-white">
+            New Password
+          </h1>
+          <p className="mb-10 text-m text-gray-200">
+            Enter your new password
           </p>
 
           <form className="space-y-4">
@@ -48,9 +50,9 @@ const Login = () => {
             </button>
             <button
               type="submit"
-              className="w-full py-2 text-white border-2 border-black rounded-full hover:bg-gray-800 cursor-pointer"
+              className="w-full py-2 text-white border-2 border-white rounded-full hover:bg-gray-800 cursor-pointer"
             >
-              Create New Password
+              Cancel
             </button>
           </form>
         </div>
