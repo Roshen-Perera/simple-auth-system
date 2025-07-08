@@ -31,7 +31,7 @@ const Login = () => {
               <input type="checkbox" className="mr-1" />
               Remember Me
             </label>
-            <a href="#" className="hover:underline">
+            <a href="/reset" className="hover:underline">
               Forgot Password?
             </a>
           </div>
