@@ -15,6 +15,27 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+const onSubmit = (data: FieldValues) => {
+  const loginUser = async () => {
+    try {
+      const response = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
+
+      if (response?.error) {
+        throw new Error(response.error);
+      }
+
+      // Redirect to dashboard on successful login
+      window.location.href = "/dashboard";
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+  // Call the function to handle login
+  loginUser();
+};
 const Login = () => {
   const {
     register,
