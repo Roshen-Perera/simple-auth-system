@@ -28,7 +28,7 @@ const onSubmit = (data: FieldValues) => {
       }
 
       // Redirect to dashboard on successful login
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (error) {
       console.error("Error during login:", error);
     }
