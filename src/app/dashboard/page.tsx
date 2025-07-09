@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { use } from "react";
 
 export default function Dashboard() {
     return (
