@@ -6,7 +6,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import z from "zod";
 
 const schema = z.object({
-  username: z.string().min(1, { message: "Username is required" }),
+  name: z.string().min(1, { message: "Username is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   password: z
     .string()
@@ -69,29 +69,31 @@ const Login = () => {
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <label className="text-white font-semibold" htmlFor="username">
+            <label className="text-white font-semibold" htmlFor="name">
               Username
             </label>
             <input
-              id="username"
-              {...register("username")}
+              id="name"
+              {...register("name")}
               type="text"
               className="w-full pt px-4 py-2 rounded-full bg-white text-black focus:outline-none"
             />
+            {errors.name && (
+              <label className="text-red-500">{errors.name.message}</label>
+            )}
             <label className="text-white font-semibold" htmlFor="email">
               Email Address
             </label>
-            {errors.email && (
-              <label className="text-red-500">{errors.email.message}</label>
-            )}
+
             <input
               id="email"
               {...register("email")}
               type="email"
               className="w-full pt px-4 py-2 rounded-full bg-white text-black focus:outline-none"
             />
-            {errors.username && (
-              <label className="text-red-500">{errors.username.message}</label>
+
+            {errors.email && (
+              <label className="text-red-500">{errors.email.message}</label>
             )}
             <label className="text-white font-semibold" htmlFor="password">
               Password
@@ -102,16 +104,16 @@ const Login = () => {
               type="password"
               className="w-full px-4 py-2 rounded-full bg-white text-black focus:outline-none"
             />
-            
+
             <div className="backdrop-blur-md p-3 rounded-2xl">
               <p className="font-semibold text-white">Password Requirements</p>
               <div>
-              {errors.password && (
-                <label className="text-red-500">
-                  {errors.password.message}
-                </label>
-              )}
-            </div>
+                {errors.password && (
+                  <label className="text-red-500">
+                    {errors.password.message}
+                  </label>
+                )}
+              </div>
             </div>
             <div className="flex justify-between items-center text-sm text-gray-300">
               <label className="flex items-center">

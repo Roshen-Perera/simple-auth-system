@@ -4,6 +4,7 @@ import React from "react";
 import { z } from "zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 
 const schema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -14,9 +15,6 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const onSubmit = (data: FieldValues) => {
-  console.log(data.email);
-};
 const Login = () => {
   const {
     register,

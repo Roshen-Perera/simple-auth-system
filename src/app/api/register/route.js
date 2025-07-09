@@ -7,20 +7,34 @@ const prisma = new PrismaClient();
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { username, email, password } = body;
+        const { name, email, password } = body;
 
-        // ✅ simulate a user creation or database save
-        // await createUser(email, password);
-        console.log('Received registration data :', {
-            username,
-            email,
-            password
+        const existingUser = await prisma.user.findUnique({
+            where: { 
+                email : email 
+            }
         });
+
+        if (existingUser) {
+            return NextResponse.json(
+                { message: 'User already exists.' },
+                { status: 409 } 
+            );
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword
+            }   
+        });
+
+        console.log('Received registration data :',newUser);
         
-        return NextResponse.json(
-            { message: 'User registered successfully.' },
-            { status: 201 }
-        );
+        return NextResponse.json(newUser);
     } catch (error) {
         console.error('Error in /api/register:', error);
         return NextResponse.json(
