@@ -1,8 +1,12 @@
 "use client"
 
-import React, { use } from "react";
+import { useSession } from "next-auth/react";
+import React from "react";
 
 export default function Dashboard() {
+    const { data: session, status } = useSession();
+    console.log("Session Data:", session);
+    
     return (
         <div className="min-h-screen bg-gray-100 p-8">
             <header className="mb-8 flex items-center justify-between">

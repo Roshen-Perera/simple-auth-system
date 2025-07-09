@@ -12,10 +12,10 @@ interface ProviderProps {
 
 export default function Provider({ children, session }: ProviderProps) {
   return (
-    <div>
+    <>
         <SessionProvider session={session}>
             {children}
         </SessionProvider>
-    </div>
+    </>
   )
 }
